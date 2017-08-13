@@ -101,9 +101,14 @@ namespace Raptor
                 return _terrariaAssembly;
             }
 
-            // Resolve assemblies packed into the Terraria assembly. This is necessary since we're not using
-            // WindowsLaunch to launch the game.
-            var resourceName = new AssemblyName(args.Name).Name + ".dll";
+	        if (AppDomain.CurrentDomain.GetAssemblies().Any(a => a.FullName == args.Name))
+	        {
+		        return AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(a => a.FullName == args.Name);
+	        }
+
+			// Resolve assemblies packed into the Terraria assembly. This is necessary since we're not using
+			// WindowsLaunch to launch the game.
+			var resourceName = new AssemblyName(args.Name).Name + ".dll";
             resourceName = _terrariaAssembly.GetManifestResourceNames().FirstOrDefault(n => n.EndsWith(resourceName));
             if (resourceName == null)
             {
@@ -117,7 +122,7 @@ namespace Raptor
                 stream.Read(bytes, 0, bytes.Length);
                 return Assembly.Load(bytes);
             }
-        }
+		}
 
         private static void Run(string[] args)
         {
