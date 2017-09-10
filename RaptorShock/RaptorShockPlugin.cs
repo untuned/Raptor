@@ -290,6 +290,7 @@ namespace RaptorShock
                 }
                 if (_commands.IsInfiniteWings)
                 {
+                    player.carpetTime = 2;
                     player.wingTime = 2;
                 }
                 if (_commands.RangeValue != null)
