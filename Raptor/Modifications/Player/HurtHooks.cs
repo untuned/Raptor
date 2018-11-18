@@ -20,8 +20,8 @@ namespace Raptor.Modifications.Player
                 Create(OpCodes.Ldarg_0),
                 Create(OpCodes.Ldarg_1),
                 Create(OpCodes.Ldarg_2),
-                Create(OpCodes.Ldarg_S, hurt.Parameters[4]),
-                Create(OpCodes.Ldarg_S, hurt.Parameters[6]),
+                Create(OpCodes.Ldarg_S, hurt.Parameters[3]), 
+                Create(OpCodes.Ldarg_S, hurt.Parameters[5]), 
                 Create(OpCodes.Call, module.Import(typeof(PlayerHooks).GetMethod("InvokeHurting", Flags))),
                 Create(OpCodes.Brfalse_S, hurt.Body.Instructions[0]),
                 Create(OpCodes.Ldc_R8, 0.0),
@@ -30,8 +30,8 @@ namespace Raptor.Modifications.Player
                 Create(OpCodes.Ldarg_0),
                 Create(OpCodes.Ldarg_1),
                 Create(OpCodes.Ldarg_2),
-                Create(OpCodes.Ldarg_S, hurt.Parameters[4]),
-                Create(OpCodes.Ldarg_S, hurt.Parameters[6]),
+                Create(OpCodes.Ldarg_S, hurt.Parameters[3]),
+                Create(OpCodes.Ldarg_S, hurt.Parameters[5]),
                 Create(OpCodes.Call, module.Import(typeof(PlayerHooks).GetMethod("InvokeHurt", Flags))));
             hurt.ReplaceShortBranches();
         }
